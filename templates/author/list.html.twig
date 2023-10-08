@@ -5,14 +5,14 @@
         <ul>
             {% set nb_totals_livres= 0 %}
             {% for key, author in authors %}
-                <li>
-                    <img src="{{ asset(author.picture) }}" >
-                    <h2>{{ author.username|upper }}</h2>
-                    <p>Email: {{ author.email }}</p>
-                    <p>Number of Books: {{ author.nb_books }}</p>
-                    <a href="{{ path('auhtorDetails', {'id': author.id}) }}">Détails</a>
+               
+                    <li> <img src="{{ asset(author.picture) }}" ></li>
+                     <li><h2>{{ author.username|upper }}</h2></li>
+                   <li>  <p>Email: {{ author.email }}</p></li>
+                   <li>  <p>Number of Books: {{ author.nb_books }}</p></li>
+                     <li><a href="{{ path('auhtorDetails', {'id': author.id}) }}">Détails</a></li>
                     
-                </li>
+                
                 {% set nb_totals_livres = nb_totals_livres + author.nb_books %}
             {% endfor %}
         </ul>
