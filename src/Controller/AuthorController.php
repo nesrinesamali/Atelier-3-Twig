@@ -112,40 +112,26 @@ class AuthorController extends AbstractController
         ]);
     }
 
-    // #[Route('/delete/{id}', name: 'author_delete')]
-    // public function deleteAuthor(Request $request,$id, ManagerRegistry $manager): Response
-    // {
-    //     $em = $manager->getManager();
-    //     $authorrepository = $em->getRepository(Author::class);
-    //     $author = $authorrepository->find($id);
-
-    //     $em->remove($author);
-    //     $em->flush();
-    //     $list = $authorrepository->findAll();
-    //     return $this->render('author/listAuthor.html.twig', ['authors'=>$list]);
-    // }
+   
     #[Route('/delete/{id}', name: 'author_delete')]
 public function deleteAuthor(Request $request, $id, ManagerRegistry $manager): Response
 {
     $em = $manager->getManager();
     $authorRepository = $em->getRepository(Author::class);
 
-    // Recherche de l'auteur par son identifiant
     $author = $authorRepository->find($id);
 
-    // Vérification si l'auteur a été trouvé
+   
     if ($author !== null) {
-        // Suppression de l'auteur
+      
         $em->remove($author);
         $em->flush();
 
-        // Récupération de la liste mise à jour des auteurs après la suppression
         $list = $authorRepository->findAll();
 
-        // Rendu de la vue avec la liste mise à jour des auteurs
         return $this->render('author/listAuthor.html.twig', ['authors' => $list]);
     } else {
-        // Gestion du cas où l'auteur n'a pas été trouvé
+       
         return new Response('Auteur non trouvé', Response::HTTP_NOT_FOUND);
     }
 }
