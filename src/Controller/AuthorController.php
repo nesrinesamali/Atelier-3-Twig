@@ -137,5 +137,21 @@ public function deleteAuthor(Request $request, $id, ManagerRegistry $manager): R
 }
 
 
+
+
+#[Route('/deleteAuthorsnbzero', name: 'deleteAuthorsnbzero')]
+    public function deleteAuthorsnbzero(ManagerRegistry $manager, AuthorRepository $authorRepository)
+    {
+        $list = $authorRepository->findBy(['nb_books' => 0]);
+        $em=$manager->getManager();
+        foreach ($list as $author) {
+            $em->remove($author);
+        }
+        $em->flush();
+
+        
+        return $this->redirectToRoute('list_author');
+    }
+
 }
 
